@@ -1,0 +1,93 @@
+﻿@model IEnumerable<BanHangOnline.Models.ShoppingCartItem>
+@using BanHangOnline.Common
+<table class="table">
+    <tr class="text-center">
+        <th>STT</th>
+        <th>Ảnh sản phẩm</th>
+        <th>Tên sản phẩm</th>
+        <th>Danh mục </th>
+        <th>Giá</th>
+        <th style="width:100px;">Số lượng</th>
+        <th>Thành tiền</th>
+
+        <th style="width:200px;">
+
+        </th>
+    </tr>
+    @if (Model != null && Model.Any())
+    {
+        var i = 0;
+        var tongTien = decimal.Zero;
+        foreach (var item in Model)
+        {
+            tongTien += item.TotalPrice;
+            <tr class="text-center" id="trow_@item.ProductId">
+                <td>@(i+1)</td>
+                <td><img src="@item.ProductImg" width="60" /></td>
+                <td>
+                    <a href="/chi-tiet/@item.Alias-p@(item.ProductId)">
+                        @item.ProductName
+                    </a>
+                </td>
+                <td>@item.CategoryName</td>
+                <td>@WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0)</td>
+                <td><input type="number" min="1" max="@ProductsHelper.getQuantityByProductId(item.ProductId)" value="@item.Quantity" id="Quantity_@item.ProductId" onkeydown="return limitQuantity(event)" /></td>
+                <th>@WebBanHangOnline.Common.Common.FormatNumber(item.TotalPrice, 0)</th>
+                <td>
+                    <a href="#" data-id="@item.ProductId" class="btn btn-sm btn-danger btnDelete">Xóa</a>
+                    <a href="#" data-id="@item.ProductId" class="btn btn-sm btn-success btnUpdate">Cập nhật</a>
+                </td>
+            </tr>
+            i++;
+<script>
+                function limitQuantity(event) {
+                    // Get the current value of the input field
+                    const value = parseInt(event.target.value) || 0;
+
+                    // Allow the user to type "+" and "-" to increase or decrease the value
+                    if (event.key === "+" || event.key === "-") {
+                        return true;
+                    }
+
+                    // Allow the user to use standard navigation keys (e.g., arrow keys, tab, enter, etc.)
+                    if (event.ctrlKey || event.altKey || event.metaKey || event.key.length > 1) {
+                        return true;
+                    }
+
+                    // Prevent the user from typing a value greater than 10
+                    if (value >= @ProductsHelper.getQuantityByProductId(item.ProductId) && event.key !== "Backspace") {
+                        event.preventDefault();
+                        return false;
+                    }
+
+                    return true;
+                }
+</script>
+        }
+        <tr>
+            <th colspan="6" class="text-right">Tổng:</th>
+            <th class="text-center">@WebBanHangOnline.Common.Common.FormatNumber(tongTien, 0)</th>
+            <th></th>
+        </tr>
+        <tr>
+            <th colspan="6" class="text-right"></th>
+            <th></th>
+            @*<th class="text-center">
+                    <a href="#" class="btn btn-sm btn-danger btnDeleteAll">Xóa</a>
+                    <a href="#" class="btn btn-sm btn-success ">Thanh toán</a>
+                </th>*@
+        </tr>
+
+    }
+    else
+    {
+
+        <tr>
+            <th colspan="6">Không có sản phẩm trong giỏ hàng</th>
+        </tr>
+    }
+</table>
+
+
+
+

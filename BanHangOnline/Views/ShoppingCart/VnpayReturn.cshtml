@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "VnpayReturn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/categories_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/categories_responsive.css">
+<div class="container product_section_container">
+    <div class="row">
+        <div class="col product_section clearfix">
+
+            <!-- Breadcrumbs -->
+
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><a href="/"><i class="fa fa-angle-right" aria-hidden="true"></i>Thanh toán</a></li>
+                </ul>
+            </div>
+
+            <!-- Sidebar -->
+            <!-- Main Content -->
+            <div class="row">
+
+                <div class="col-md-12 text-center">
+                    <h1 class="">Thanh toán thành công</h1>
+                    @if (ViewBag.ThanhToanThanhCong != null)
+                    {
+                        <p>Bạn đã thanh toán thành công với @ViewBag.ThanhToanThanhCong!</p>
+                    }
+                    <p>@ViewBag.InnerText!</p>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <h4>Quý khách có thể xem lại thông tin đơn hàng <a href="https://localhost:44321/account/Information">tại đây</a></h4>
+                    }
+                    else
+                    {
+                        <h4>Quý khách có thể xem lại thông tin chi tiết đơn hàng tại gmail đã đăng ký</h4>
+                    }
+
+                </div>
+                
+            </div>
+            @*<div class="col-md-12" text-center>
+                <h4>Quý khách có thể xem lại thông tin đơn hàng <a href="https://localhost:44321/account/Information">tại đây</a></h4>
+            </div>*@
+            <hr />
+        </div>
+    </div>
+</div>
+

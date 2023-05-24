@@ -1,0 +1,40 @@
+﻿@*@model BanHangOnline.Models.EF.TTNhapkho*@
+@*@model PagedList.PagedList<BanHangOnline.Models.EF.TTNhapkho>*@
+@model List<BanHangOnline.Models.EF.TTNhapkho>
+@using PagedList.Mvc;
+@using PagedList;
+@{ ViewBag.Title = "ViewHistory";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; }
+
+<h2>Thông tin nhập kho của SP: @ViewBag.ProductName</h2>
+
+@if (Model != null)
+{
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Mã nhập kho</th>
+            <th>SL sp trước khi nhập</th>
+            <th>Số lượng SP nhập thêm</th>
+            <th>Số lượng SP sau khi nhâp</th>
+            <th>Giá SP</th>
+            <th>Giá cũ</th>
+            <th>Ngày nhập kho</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>@item.Id</td>
+    <td>@item.SoLuongChuaNhap</td>
+    <td>@item.SoLuongThem</td>
+    <td>@item.SoLuongSauKhiThem</td>
+    <td>@item.GiaTien VND</td>
+    <td>@item.GiaCu VND</td>
+    <td>@item.NgayTao</td>
+</tr>}
+    </tbody>
+</table>
+    <a href="/admin/products/indexkho" class="btn btn-danger">Quay lại</a>
+}

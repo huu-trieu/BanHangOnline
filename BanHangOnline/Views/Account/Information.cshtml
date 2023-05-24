@@ -1,0 +1,151 @@
+﻿@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.EntityFramework;
+@using Microsoft.AspNet.Identity.Owin;
+
+
+
+@{
+    ViewBag.Title = "Thông tin cá nhân";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+/*    .col-md-6 {
+        float: left;
+    }*/
+    .alert {
+        position: fixed;
+        top: 0;
+        right: 0;
+        margin: 20px;
+        z-index: 9999;
+        padding: 1rem 1.5rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        font-size: 1rem;
+    }
+
+    .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+    }
+
+        .alert-success .close {
+            color: inherit;
+        }
+
+        .alert-success strong {
+            font-weight: bold;
+        }
+
+        .alert-success i {
+            margin-right: 0.5rem;
+        }
+</style>
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/main_styles.css">
+<body class="fixed-top">
+    <!-- Your HTML code here -->
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong><i class="fas fa-check-circle"></i></strong> @ViewBag.Message
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>       
+    }
+</body>
+
+
+<div class="container" style="margin-top:160px">
+    <hr />
+    <h2>@ViewBag.Title</h2>
+    <div class="row">
+        <div class="col-md-5">
+            @using (Html.BeginForm("Information", "Account", FormMethod.Post, new { }))
+            {
+                //string currentUserId = User.Identity.GetUserId();
+                <input type="hidden" name="userId" value="@User.Identity.GetUserId()" />
+                if (HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    string email = "";
+                    string fullName = "";
+                    string passwordHash = "";
+
+                    string username = HttpContext.Current.User.Identity.Name;
+                    var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                    var user = userManager.FindByName(User.Identity.Name);
+
+                    bool isPasswordCorrect = false;
+
+
+
+                    // Get user information, like email and password hash
+                    email = user.Email;
+                    fullName = user.FullName;
+                    passwordHash = user.PasswordHash;
+
+
+
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <hr />
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Tên tài khoản</label>
+                        <div class="col-md-10">
+                            @*@Html.TextBoxFor(username, new { @class = "form-control", @placeholder = "Tên tài khoản" })*@
+                            <input type="text" id="username" name="username" value="@username" class="form-control" placeholder="Tên tài khoản" />
+                            @*@Html.ValidationMessageFor(x => x.UserName, null, new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @*@Html.LabelFor(m => m.FullName, new { @class = "col-md-2 control-label" })*@
+                        <label for="exampleInputEmail1">Họ tên</label>
+                        <div class="col-md-10">
+                            @*@Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @placeholder = "Nhập họ tên..." })*@
+                            @Html.TextBox("fullname", fullName, new { @class = "form-control", @placeholder = "Nhập họ tên...", @fullname = "fullname" })
+
+
+                            @*<input type="text" id="fullname" name="fullname" value="@fullName" class="form-control" placeholder="Họ tên" />*@
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @*@Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })*@
+                        <label for="exampleInputEmail1">Email</label>
+                        <div class="col-md-10">
+                            <input type="text" id="email" name="email" value="@email" class="form-control" placeholder="Email" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-8">
+                            <input type="submit" class="btn btn-success" value="Cập nhật" />
+                        </div>
+                    </div>
+
+                }
+            }
+        </div>
+        <div class="col-md-7">
+            <h3>Danh sách đơn đặt hàng</h3>
+            @Html.Action("Partial_ListOrder", "Account", new { id = @User.Identity.GetUserId() })
+        </div>
+        
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        // Hide the alert after 3 seconds
+        setTimeout(function () {
+            $('.alert').alert('close');
+        }, 3000);
+
+    </script>
+}

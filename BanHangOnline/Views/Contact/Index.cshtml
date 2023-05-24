@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewBag.Title = "Thông tin liên hệ";
+}
+<link href="~/Content/assets/styles/contact_responsive.css" rel="stylesheet" />
+<link href="~/Content/assets/styles/contact_styles.css" rel="stylesheet" />
+
+<div class="hamburger_menu">
+    <div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+    <div class="hamburger_menu_content text-right">
+        <ul class="menu_top_nav">
+            <li class="menu_item has-children">
+                <a href="#">
+                    usd
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="menu_selection">
+                    <li><a href="#">cad</a></li>
+                    <li><a href="#">aud</a></li>
+                    <li><a href="#">eur</a></li>
+                    <li><a href="#">gbp</a></li>
+                </ul>
+            </li>
+            <li class="menu_item has-children">
+                <a href="#">
+                    English
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="menu_selection">
+                    <li><a href="#">French</a></li>
+                    <li><a href="#">Italian</a></li>
+                    <li><a href="#">German</a></li>
+                    <li><a href="#">Spanish</a></li>
+                </ul>
+            </li>
+            <li class="menu_item has-children">
+                <a href="#">
+                    My Account
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="menu_selection">
+                    <li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+                    <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+                </ul>
+            </li>
+            <li class="menu_item"><a href="#">home</a></li>
+            <li class="menu_item"><a href="#">shop</a></li>
+            <li class="menu_item"><a href="#">promotion</a></li>
+            <li class="menu_item"><a href="#">pages</a></li>
+            <li class="menu_item"><a href="#">blog</a></li>
+            <li class="menu_item"><a href="#">contact</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="container contact_container">
+    <div class="row">
+        <div class="col">
+
+            <!-- Breadcrumbs -->
+
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+                <ul>
+                    <li><a href="index.html">Liên hệ</a></li>
+                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Contact</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Map Container -->
+
+    <div class="row">
+       @*<div class="col" >
+            <h3>Thông tin liên hệ</h3>
+            <p>Chủ cửa hàng: Tập đoàn bách hóa DTT</p>
+            <p>SĐT: 0399.999.999</p>
+            <p>Email: Bachhoaonline@gmail.com</p>
+        </div>*@
+        <div class="col">
+            <div id="google_map">
+                <div class="map_container">
+
+                    <div id="map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6689086094348!2d106.67762942799298!3d10.759980037930788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7e38d70f%3A0x9f2317bb653235f3!2zMjczIMSQLiBBbiBELiBWxrDGoW5nLCBQaMaw4budbmcgMywgSOG7kyBDaMOtIE1pbmgsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1679712778819!5m2!1svi!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Us -->
+
+    <div class="row">
+
+        <div class="col-lg-6 contact_col">
+            <div class="contact_contents">
+                <h1>Thông tin liên hệ</h1>
+                <div>
+                    <p>Tập đoàn bách hóa DTT</p>
+                    <p>0399.999.999</p>
+                    <p>Bachhoaonline@gmail.com</p>
+                </div>
+                <div>
+                </div>
+                <div>
+                    <p>Giờ làm việc: 24/7</p>
+                </div>
+            </div>
+
+            <!-- Follow Us -->
+
+            <div class="follow_us_contents">
+                <ul class="social d-flex flex-row">
+                    <li><a href="#" style="background-color: #3a61c9"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#" style="background-color: #41a1f6"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#" style="background-color: #fb4343"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                    <li><a href="#" style="background-color: #8f6247"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="col-lg-6 get_in_touch_col">
+            <div class="get_in_touch_contents">
+                <h1>Hãy liên hệ với chúng tôi!</h1>
+                @*<p>Fill out the form below to recieve a free and confidential.</p>*@
+                <form action="post">
+                    <div>
+                        <input id="input_name" class="form_input input_name input_ph" type="text" name="name" placeholder="Name" required="required" data-error="Name is required.">
+                        <input id="input_email" class="form_input input_email input_ph" type="email" name="email" placeholder="Email" required="required" data-error="Valid email is required.">
+                        <input id="input_website" class="form_input input_website input_ph" type="url" name="name" placeholder="Website" required="required" data-error="Name is required.">
+                        <textarea id="input_message" class="input_ph input_message" name="message" placeholder="Message" rows="3" required data-error="Please, write us a message."></textarea>
+                    </div>
+                    <div>
+                        <button id="review_submit" type="submit" class="red_button message_submit_btn trans_300" value="Submit">send message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Content/assets/js/contact_custom.js"></script>
+}

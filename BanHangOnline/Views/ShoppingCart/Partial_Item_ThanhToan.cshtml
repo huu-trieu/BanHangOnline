@@ -1,0 +1,36 @@
+﻿@model IEnumerable<BanHangOnline.Models.ShoppingCartItem>
+@{
+    ViewBag.Title = "Partial_Item_ThanhToan";
+}
+
+@if (Model != null && Model.Any())
+{
+    <h3>GIỎ HÀNG<span style="float:right;"><small>@Model.Count()</small></span></h3>
+    var i = 0;
+    var tongTien = decimal.Zero;
+<div style="border: 1px solid #808080;">
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            tongTien += item.TotalPrice;
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0)</td>
+            </tr>
+        }
+        <tr>
+            <td>Tổng tiền</td>
+            <td>@WebBanHangOnline.Common.Common.FormatNumber(tongTien, 0)</td>
+        </tr>
+    </table>
+</div>
+    
+
+
+}
+else
+{
+
+
+}
+

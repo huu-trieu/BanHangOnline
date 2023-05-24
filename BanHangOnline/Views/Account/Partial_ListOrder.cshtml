@@ -1,0 +1,60 @@
+﻿@model IEnumerable<BanHangOnline.Models.EF.Order>
+
+@if (Model != null && Model.Any())
+{
+    var i = 1;
+    <div style="height:500px;overflow:auto;">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Ngày tạo</th>
+                    <th>Tình trạng đơn</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @i
+                        </td>
+                        <td>@item.createdDate.ToString("dd-MM-yyyy")</td>
+                        <td>@(item.Status==1?"Chưa thanh toán": item.Status == 2 ? "Đã thanh toán" : item.Status == 3 ? "Đã hoàn thành" : "Đã hủy")</td>
+                        <td>
+                            <a href="/order/view/@item.ID" class="btn btn-sm btn-primary">Chi tiết</a>
+                            @if (item.Status == 1)
+                            {
+                                <!-- form fields here -->
+                                <a href="#" data-id="@item.ID" class="btn btn-sm btn-danger btnLuu">Hủy đơn</a>
+                            }
+                        </td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        $('body').on('click', '.btnLuu', function () {
+            var id = $(this).data("id");
+            var conf = confirm('Bạn có muốn hủy đơn hàng này không?');
+            if (conf === true) {
+                $.ajax({
+                    url: '/Account/CancelOrder',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.Success === true) {
+                            location.reload();
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
